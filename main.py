@@ -5,16 +5,7 @@ import json  # работа с json-файлами и json-строками
 import os  # работа с файловой системой
 import socket
 
-commands = {
-    "greeting": ["привет", "здравствуй", "добрый день", "доброе утро", "добрый вечер"],
-    'searching': ["найти", "найди"],
-    "opening": ["открой", "запусти"],
-    "writing": ["записывай", "конcпектируй"],
-    "waiting": ["слушаю вас", ""],
-    "special_commands": ["за работу"],
-    "graduation": []
-
-}
+"""##########################___STARTING_PROGRAMM___##########################"""
 
 def start(recognizer, microphone):
     recognized_data = ""
@@ -75,14 +66,65 @@ def listen_for_command(recognizer, microphone):
         os.remove("wait_for_command.wav")
         return execute_command_with_name(recognized_data)
 
+commands = {
+    "greeting": ["привет", "здравствуй", "добрый день", "доброе утро", "добрый вечер"],
+    'searching': ["найти", "найди"],
+    "opening": ["открой", "запусти"],
+    "writing": ["записывай", "конcпектируй"],
+    "waiting": ["слушаю вас", "я во внимании"],
+    "special_commands": ["за работу"],
+    "graduation": ["спасибо", "благодарю", "умница", "молодец"],
+    "answer_for_graduation": ["обращайтесь", "к вашим услугам"]
+}
 
 def execute_command_with_name(command_name):
     print(command_name)
+    command = ""
     for key in commands.keys():
         if command_name in commands[key]:
-            return key
+            command = key
+    if command == "greeting":
+        return greeting()
+    elif command == "searching":
+        return searching()
+    elif command == "opening":
+        return opening()
+    elif command == "writing":
+        return writing()
+    elif command == "special_commands":
+        return special_commands()
+    elif command == "graduation":
+        return graduation()
+    elif command == "answer_for_graduation":
+        return answer_for_graduation()
     else:
-        print("Команда не распознана")
+        return "Команда не распознана"
+
+"""##########################___COMMANDS___##########################"""
+
+def greeting():
+    pass
+
+def searching():
+    pass
+
+def opening():
+    pass
+
+def writing():
+    pass
+
+def special_commands():
+    pass
+
+def graduation():
+    pass
+
+def answer_for_graduation():
+    pass
+
+
+"""##########################___SETUP___##########################"""
 
 def f():
     return "Соединение разорвано"
@@ -105,5 +147,3 @@ if __name__ == "__main__":
 
     finally:
         sock.close()
-
-
